@@ -19,27 +19,25 @@ internal sealed class ScsTelemetryReader : IDisposable
     private const int GearOffset = 500 + 0;
     private const int GearDashboardOffset = 504;
 
-    private const int FuelCapacityOffset = 700 + 4;
-    private const int CargoMassOffset = 700 + 40;
+    private const int FuelCapacityOffset = 704;
+    private const int CargoMassOffset = 748;
 
-    private const int SpeedOffset = 700 + 64;
-    private const int RpmOffset = 704;
-    private const int CruiseControlSpeedOffset = 700 + 84;
-    private const int FuelOffset = 700 + 104;
-    private const int FuelRangeOffset = 700 + 124;
-    private const int OdometerOffset = 700 + 176;
-    private const int RouteDistanceOffset = 700 + 180;
-    private const int RouteTimeOffset = 700 + 184;
+    private const int SpeedOffset = 816;
+    private const int RpmOffset = 820;
+    private const int FuelOffset = 868;
+    private const int FuelRangeOffset = 876;
+    private const int OdometerOffset = 924;
+    private const int RouteDistanceOffset = 928;
+    private const int RouteTimeOffset = 932;
 
-    // Fifth zone starts at 1500. The fields below follow the bool layout in the SDK map.
-    private const int EngineEnabledOffset = 1500 + 16;
-    private const int CruiseControlOffset = 1500 + 29;
-    private const int ParkBrakeOffset = 1500 + 0;
+    // Fifth zone starts at 1500. config_b occupies 66 bytes, so truck_b starts at 1566.
+    private const int EngineEnabledOffset = 1576;
+    private const int CruiseControlOffset = 1590;
 
-    private const int TruckNameOffset = 2300 + (64 * 3);
-    private const int CargoOffset = 2300 + (64 * 4);
-    private const int CityDstOffset = 2300 + (64 * 5);
-    private const int CitySrcOffset = 2300 + (64 * 10);
+    private const int TruckNameOffset = 2492;
+    private const int CargoOffset = 2556;
+    private const int CityDstOffset = 2620;
+    private const int CitySrcOffset = 2940;
 
     private MemoryMappedFile? _map;
     private MemoryMappedViewAccessor? _view;
