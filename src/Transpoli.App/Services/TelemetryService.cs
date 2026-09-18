@@ -67,7 +67,27 @@ public sealed class TelemetryService : IDisposable
         }
         else
         {
-            snapshot = Simulate();
+            var demo = Simulate();
+            snapshot = new TelemetrySnapshot(
+                Connected: false,
+                TruckName: demo.TruckName,
+                SpeedKmh: Math.Round(demo.SpeedKmh, 0),
+                Rpm: (int)Math.Round(demo.Rpm),
+                Gear: demo.Gear,
+                CruiseControl: demo.CruiseControl,
+                EngineOn: demo.EngineOn,
+                FuelLiters: Math.Round(demo.FuelLiters, 1),
+                FuelCapacityLiters: Math.Round(demo.FuelCapacityLiters, 1),
+                OdometerKm: Math.Round(demo.OdometerKm, 1),
+                Cargo: demo.Cargo,
+                CargoWeightKg: Math.Round(demo.CargoWeightKg, 0),
+                Origin: demo.Origin,
+                Destination: demo.Destination,
+                TripTotalKm: Math.Round(demo.RouteDistanceKm, 1),
+                TripDrivenKm: Math.Round(Math.Max(0, demo.RouteDistanceKm - demo.RouteRemainingKm), 1),
+                DrivingTime: _driving,
+                RestTime: TimeSpan.Zero,
+                EstimatedArrival: DateTime.Now.AddSeconds(Math.Max(0, demo.RouteTimeSeconds)));
         }
 
         Current = snapshot;
