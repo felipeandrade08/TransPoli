@@ -19,7 +19,7 @@ RestartApplications=no
 Uninstallable=yes
 
 [Files]
-Source: "publish\Transpoli\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\publish\Transpoli\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\Transpoli"; Filename: "{app}\Transpoli.exe"
