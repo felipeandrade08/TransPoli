@@ -2,6 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         <FontFamily x:Key="UiFont">Segoe UI</FontFamily>
         <SolidColorBrush x:Key="BgBrush" Color="#06101A" />
         <SolidColorBrush x:Key="PanelBrush" Color="#0A1723" />
@@ -16,5 +20,6 @@
             <Setter Property="FontFamily" Value="{StaticResource UiFont}" />
             <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
         </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
