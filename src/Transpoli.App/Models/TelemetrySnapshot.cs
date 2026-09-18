@@ -10,6 +10,7 @@ public sealed record TelemetrySnapshot(
     bool EngineOn,
     double FuelLiters,
     double FuelCapacityLiters,
+    double FuelRangeKm,
     double OdometerKm,
     string Cargo,
     double CargoWeightKg,
