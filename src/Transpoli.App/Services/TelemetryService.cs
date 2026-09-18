@@ -41,8 +41,10 @@ public sealed class TelemetryService : IDisposable
         if (data is null)
             return;
 
-        var snapshot = data.Connected
-            ? new TelemetrySnapshot(
+        TelemetrySnapshot snapshot;
+        if (data.Connected)
+        {
+            snapshot = new TelemetrySnapshot(
                 Connected: true,
                 TruckName: string.IsNullOrWhiteSpace(data.TruckName) ? "ETS2" : data.TruckName,
                 SpeedKmh: Math.Round(data.SpeedKmh, 0),
@@ -61,8 +63,12 @@ public sealed class TelemetryService : IDisposable
                 TripDrivenKm: Math.Round(Math.Max(0, data.RouteDistanceKm - data.RouteRemainingKm), 1),
                 DrivingTime: _driving,
                 RestTime: TimeSpan.Zero,
-                EstimatedArrival: DateTime.Now.AddSeconds(Math.Max(0, data.RouteTimeSeconds)))
-            : Simulate();
+                EstimatedArrival: DateTime.Now.AddSeconds(Math.Max(0, data.RouteTimeSeconds)));
+        }
+        else
+        {
+            snapshot = Simulate();
+        }
 
         Current = snapshot;
         Updated?.Invoke(this, Current);
