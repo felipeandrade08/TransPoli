@@ -2,6 +2,7 @@ name: Build Transpoli
 
 on:
   push:
+    branches: ['main']
     tags: ['v*']
   workflow_dispatch:
 
