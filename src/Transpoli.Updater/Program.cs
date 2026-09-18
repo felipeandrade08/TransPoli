@@ -34,6 +34,7 @@ try
     foreach (var source in Directory.GetFiles(root, "*", SearchOption.AllDirectories))
     {
         var relative = Path.GetRelativePath(root, source);
+        if (string.Equals(relative, "Transpoli.Updater.exe", StringComparison.OrdinalIgnoreCase)) continue;
         var destination = Path.Combine(target, relative);
         Directory.CreateDirectory(Path.GetDirectoryName(destination)!);
         File.Copy(source, destination, true);
