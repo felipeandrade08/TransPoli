@@ -33,12 +33,12 @@ internal sealed class ScsTelemetryReader : IDisposable
 
     // Fifth zone starts at 1500. config_b occupies 66 bytes, so truck_b starts at 1566.
     private const int EngineEnabledOffset = 1576;
-    private const int CruiseControlOffset = 1590;
+    private const int CruiseControlOffset = 1589;
 
     private const int TruckNameOffset = 2492;
     private const int CargoOffset = 2556;
     private const int CityDstOffset = 2620;
-    private const int CitySrcOffset = 2940;
+    private const int CitySrcOffset = 2748;
 
     private MemoryMappedFile? _map;
     private MemoryMappedViewAccessor? _view;
