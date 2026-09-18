@@ -21,40 +21,61 @@ public sealed class UpdateService
         _http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github+json"));
     }
 
-    public Version CurrentVersion => Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 1, 0);
+    public Version CurrentVersion =>
+        Assembly.GetExecutingAssembly().GetName().Version ?? new Version(0, 1, 0);
 
     public async Task<UpdateInfo> CheckAsync(CancellationToken cancellationToken = default)
     {
         using var response = await _http.GetAsync(LatestReleaseApi, cancellationToken);
         response.EnsureSuccessStatusCode();
+
         await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
         using var json = await JsonDocument.ParseAsync(stream, cancellationToken: cancellationToken);
+
         var root = json.RootElement;
         var tag = root.GetProperty("tag_name").GetString()?.TrimStart('v') ?? "0.0.0";
-        var latest = Version.Parse(tag);
-        var notes = root.TryGetProperty("body", out var body) ? body.GetString() ?? string.Empty : string.Empty;
+
+        if (!Version.TryParse(tag, out var latest))
+            throw new InvalidOperationException($"Versão de release inválida: {tag}");
+
+        var notes = root.TryGetProperty("body", out var body)
+            ? body.GetString() ?? string.Empty
+            : string.Empty;
+
         var download = string.Empty;
+
         if (root.TryGetProperty("assets", out var assets))
         {
             foreach (var asset in assets.EnumerateArray())
             {
-                if (asset.GetProperty("name").GetString() == AssetName)
+                if (string.Equals(asset.GetProperty("name").GetString(), AssetName, StringComparison.OrdinalIgnoreCase))
                 {
                     download = asset.GetProperty("browser_download_url").GetString() ?? string.Empty;
                     break;
                 }
             }
         }
-        return new UpdateInfo(latest > CurrentVersion, CurrentVersion, latest, download, notes);
+
+        return new UpdateInfo(
+            latest > CurrentVersion,
+            CurrentVersion,
+            latest,
+            download,
+            notes);
     }
 
     public bool StartUpdate(UpdateInfo info)
     {
-        if (!info.Available || string.IsNullOrWhiteSpace(info.DownloadUrl)) return false;
+        if (!info.Available || string.IsNullOrWhiteSpace(info.DownloadUrl))
+            return false;
+
         var updater = Path.Combine(AppContext.BaseDirectory, "Transpoli.Updater.exe");
-        if (!File.Exists(updater)) return false;
+        if (!File.Exists(updater))
+            return false;
+
         var target = AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
         var app = Environment.ProcessPath ?? Path.Combine(target, "Transpoli.exe");
+
         Process.Start(new ProcessStartInfo
         {
             FileName = updater,
@@ -62,6 +83,7 @@ public sealed class UpdateService
             UseShellExecute = true,
             WorkingDirectory = target
         });
+
         return true;
     }
 }
