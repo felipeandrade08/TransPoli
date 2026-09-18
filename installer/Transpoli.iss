@@ -1,7 +1,11 @@
+#ifndef AppVersion
+  #define AppVersion "0.1.0"
+#endif
+
 [Setup]
 AppId={{A5C9E1C2-7B3E-4F3A-9C0D-7A1B2C3D4E5F}}
 AppName=Transpoli
-AppVersion=0.1.0
+AppVersion={#AppVersion}
 AppPublisher=Felipe Andrade
 AppPublisherURL=https://github.com/felipeandrade08/TransPoli
 DefaultDirName={localappdata}\Programs\Transpoli
