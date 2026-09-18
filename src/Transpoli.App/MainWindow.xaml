@@ -112,11 +112,11 @@
 
                         <Grid Margin="0,0,0,18">
                             <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Style="{StaticResource StatCard}"><TextBlock Text="ODÔMETRO" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="OdometerText" Text="128.420 km" FontSize="17" FontWeight="Bold" Margin="0,5,0,0"/></Border>
-                            <Border Grid.Column="1" Style="{StaticResource StatCard}" Margin="8,0"><TextBlock Text="COMBUSTÍVEL" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="FuelText" Text="984 L" FontSize="17" FontWeight="Bold" Margin="0,5,0,0"/></Border>
-                            <Border Grid.Column="2" Style="{StaticResource StatCard}" Margin="8,0"><TextBlock Text="AUTONOMIA" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="RangeText" Text="2.755 km" FontSize="17" FontWeight="Bold" Margin="0,5,0,0"/></Border>
-                            <Border Grid.Column="3" Style="{StaticResource StatCard}" Margin="8,0"><TextBlock Text="CARGA ATUAL" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="CargoText" Text="Nenhuma carga" FontSize="14" FontWeight="Bold" Margin="0,5,0,0"/></Border>
-                            <Border Grid.Column="4" Style="{StaticResource StatCard}" Margin="8,0,0,0"><TextBlock Text="ETA" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="EtaText" Text="--:--" Foreground="#FFC400" FontSize="20" FontWeight="Black" Margin="0,3,0,0"/></Border>
+                            <Border Grid.Column="0" Style="{StaticResource StatCard}"><StackPanel><TextBlock Text="ODÔMETRO" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="OdometerText" Text="128.420 km" FontSize="17" FontWeight="Bold" Margin="0,5,0,0"/></StackPanel></Border>
+                            <Border Grid.Column="1" Style="{StaticResource StatCard}" Margin="8,0"><StackPanel><TextBlock Text="COMBUSTÍVEL" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="FuelText" Text="984 L" FontSize="17" FontWeight="Bold" Margin="0,5,0,0"/></StackPanel></Border>
+                            <Border Grid.Column="2" Style="{StaticResource StatCard}" Margin="8,0"><StackPanel><TextBlock Text="AUTONOMIA" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="RangeText" Text="2.755 km" FontSize="17" FontWeight="Bold" Margin="0,5,0,0"/></StackPanel></Border>
+                            <Border Grid.Column="3" Style="{StaticResource StatCard}" Margin="8,0"><StackPanel><TextBlock Text="CARGA ATUAL" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="CargoText" Text="Nenhuma carga" FontSize="14" FontWeight="Bold" Margin="0,5,0,0"/></StackPanel></Border>
+                            <Border Grid.Column="4" Style="{StaticResource StatCard}" Margin="8,0,0,0"><StackPanel><TextBlock Text="ETA" Foreground="#8FA1B2" FontSize="10"/><TextBlock x:Name="EtaText" Text="--:--" Foreground="#FFC400" FontSize="20" FontWeight="Black" Margin="0,3,0,0"/></StackPanel></Border>
                         </Grid>
 
                         <Grid>
