@@ -6,20 +6,22 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/Controls.xaml" />
             </ResourceDictionary.MergedDictionaries>
-        <FontFamily x:Key="UiFont">Segoe UI</FontFamily>
-        <SolidColorBrush x:Key="BgBrush" Color="#06101A" />
-        <SolidColorBrush x:Key="PanelBrush" Color="#0A1723" />
-        <SolidColorBrush x:Key="Panel2Brush" Color="#0D1E2D" />
-        <SolidColorBrush x:Key="GoldBrush" Color="#FFC400" />
-        <SolidColorBrush x:Key="GoldDimBrush" Color="#8A6900" />
-        <SolidColorBrush x:Key="TextBrush" Color="#F4F7FA" />
-        <SolidColorBrush x:Key="MutedBrush" Color="#8FA1B2" />
-        <SolidColorBrush x:Key="GreenBrush" Color="#27E06F" />
-        <SolidColorBrush x:Key="RedBrush" Color="#FF4D5F" />
-        <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource UiFont}" />
-            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
-        </Style>
+
+            <FontFamily x:Key="UiFont">Segoe UI</FontFamily>
+            <SolidColorBrush x:Key="BgBrush" Color="#06101A" />
+            <SolidColorBrush x:Key="PanelBrush" Color="#0A1723" />
+            <SolidColorBrush x:Key="Panel2Brush" Color="#0D1E2D" />
+            <SolidColorBrush x:Key="GoldBrush" Color="#FFC400" />
+            <SolidColorBrush x:Key="GoldDimBrush" Color="#8A6900" />
+            <SolidColorBrush x:Key="TextBrush" Color="#F4F7FA" />
+            <SolidColorBrush x:Key="MutedBrush" Color="#8FA1B2" />
+            <SolidColorBrush x:Key="GreenBrush" Color="#27E06F" />
+            <SolidColorBrush x:Key="RedBrush" Color="#FF4D5F" />
+
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource UiFont}" />
+                <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
