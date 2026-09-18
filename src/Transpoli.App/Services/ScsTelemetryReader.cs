@@ -115,13 +115,13 @@ internal sealed class ScsTelemetryReader : IDisposable
 
     private string ReadString(int offset)
     {
-        Span<byte> buffer = stackalloc byte[64];
-        _view!.ReadArray(offset, buffer.ToArray(), 0, buffer.Length);
-        var length = buffer.IndexOf((byte)0);
+        var buffer = new byte[64];
+        _view!.ReadArray(offset, buffer, 0, buffer.Length);
+        var length = Array.IndexOf(buffer, (byte)0);
         if (length < 0)
             length = buffer.Length;
 
-        return Encoding.UTF8.GetString(buffer[..length]).Trim();
+        return Encoding.UTF8.GetString(buffer, 0, length).Trim();
     }
 
     private static string FormatGear(int dashboardGear, int gear)
