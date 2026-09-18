@@ -23,20 +23,26 @@ public partial class MainWindow : Window
 
     private void Telemetry_Updated(object? sender, Models.TelemetrySnapshot e) => Dispatcher.Invoke(() =>
     {
-        TruckNameText.Text = "Scania S 770";
+        TruckNameText.Text = e.TruckName;
+        ConnectionDot.Fill = e.Connected ? new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(39, 224, 111)) : new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(240, 68, 68));
+        ConnectionText.Text = e.Connected ? "ETS2 CONECTADO" : "AGUARDANDO ETS2";
+        TelemetryStatusText.Text = e.Connected ? "ETS2 • TELEMETRIA ATIVA" : "ETS2 • AGUARDANDO";
+        TelemetryHintText.Text = e.Connected ? $"{e.Origin} → {e.Destination}" : "Conecte o ETS2 para receber telemetria.";
+        TachographStatusText.Text = e.Connected ? "REGISTRANDO" : "AGUARDANDO";
+        FooterStatusText.Text = e.Connected ? "   Telemetria local  •  ETS2 conectado" : "   Telemetria local  •  Aguardando ETS2";
         SpeedText.Text = e.SpeedKmh.ToString("0");
         RpmText.Text = e.Rpm.ToString("N0");
         GearText.Text = e.Gear;
         CruiseText.Text = e.CruiseControl ? "ON" : "OFF";
         EngineText.Text = e.EngineOn ? "MOTOR • LIGADO" : "MOTOR • DESLIGADO";
+        EngineDot.Fill = e.EngineOn ? new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(39, 224, 111)) : new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(240, 68, 68));
         FuelText.Text = $"{e.FuelLiters:N0} L";
         OdometerText.Text = $"{e.OdometerKm:N0} km";
         CargoText.Text = e.Cargo;
         DistanceText.Text = $"{e.TripDrivenKm:N0} km";
         DrivingText.Text = e.DrivingTime.ToString(@"hh\:mm\:ss");
         RestText.Text = e.RestTime == TimeSpan.Zero ? "--:--" : e.RestTime.ToString(@"hh\:mm");
-        var range = e.FuelLiters * 2.8;
-        RangeText.Text = $"{range:N0} km";
+        RangeText.Text = e.FuelRangeKm > 0 ? $"{e.FuelRangeKm:N0} km" : "—";
         EtaText.Text = e.EstimatedArrival.ToString("HH:mm");
     });
 
