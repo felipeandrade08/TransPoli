@@ -9,6 +9,7 @@ public partial class MainWindow : Window
 {
     private readonly TelemetryService _telemetry = new();
     private readonly UpdateService _updates = new();
+    private readonly TripService _trips = new();
     private readonly DispatcherTimer _clock = new() { Interval = TimeSpan.FromSeconds(1) };
 
     public MainWindow()
@@ -44,9 +45,11 @@ public partial class MainWindow : Window
         RestText.Text = e.RestTime == TimeSpan.Zero ? "--:--" : e.RestTime.ToString(@"hh\:mm");
         RangeText.Text = e.FuelRangeKm > 0 ? $"{e.FuelRangeKm:N0} km" : "—";
         EtaText.Text = e.EstimatedArrival.ToString("HH:mm");
+        _trips.Update(e);
+        UpdateTripUi(e);
     });
 
-    private void UpdateClock()
+    private void TripButton_Click(object sender, RoutedEventArgs e)\n    {\n        var trip = _trips.Current;\n        if (trip?.IsActive == true)\n        {\n            _trips.Finish(_telemetry.Current);\n            UpdateTripUi(_telemetry.Current);\n            return;\n        }\n\n        if (!_telemetry.Current.Connected)\n        {\n            MessageBox.Show("Conecte o ETS2 antes de iniciar uma viagem.", "Transpoli", MessageBoxButton.OK, MessageBoxImage.Information);\n            return;\n        }\n\n        _trips.Start(_telemetry.Current);\n        UpdateTripUi(_telemetry.Current);\n    }\n\n    private void UpdateTripUi(Models.TelemetrySnapshot telemetry)\n    {\n        var trip = _trips.Current;\n        if (trip?.IsActive == true)\n        {\n            TripButton.Content = "FINALIZAR VIAGEM";\n            TripStatusText.Text = $"  {trip.Origin} → {trip.Destination}  •  {Math.Max(0, telemetry.OdometerKm - trip.StartOdometerKm):N1} km";\n        }\n        else if (trip is not null)\n        {\n            TripButton.Content = "NOVA VIAGEM";\n            TripStatusText.Text = $"  Última viagem: {trip.DistanceKm:N1} km";\n        }\n        else\n        {\n            TripButton.Content = "INICIAR VIAGEM";\n            TripStatusText.Text = "  Nenhuma viagem ativa";\n        }\n    }\n\n    private void UpdateClock()
     {
         ClockText.Text = DateTime.Now.ToString("HH:mm");
         TimeText.Text = DateTime.Now.ToString("HH:mm:ss");
