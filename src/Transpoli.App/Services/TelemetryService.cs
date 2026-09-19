@@ -115,6 +115,7 @@ public sealed class TelemetryService : IDisposable
             EngineOn: true,
             FuelLiters: _fuel,
             FuelCapacityLiters: 1200,
+            FuelRangeKm: _fuel * 2.4,
             OdometerKm: _odometer,
             Cargo: "Carga de demonstração",
             CargoWeightKg: 20000,
