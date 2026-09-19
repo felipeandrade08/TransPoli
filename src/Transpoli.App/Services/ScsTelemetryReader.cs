@@ -76,6 +76,7 @@ internal sealed class ScsTelemetryReader : IDisposable
                 EngineOn: _view.ReadByte(EngineEnabledOffset) != 0,
                 FuelLiters: fuel,
                 FuelCapacityLiters: fuelCapacity,
+                FuelRangeKm: _view.ReadSingle(FuelRangeOffset),
                 OdometerKm: odometer,
                 Cargo: ReadString(CargoOffset),
                 CargoWeightKg: _view.ReadSingle(CargoMassOffset),
